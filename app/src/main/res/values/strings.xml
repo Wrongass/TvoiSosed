@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Moi Sosed</string>
+    <string name="login">Войти</string>
+    <string name="mail">Введите e-mail</string>
+    <string name="pass">Введите пароль</string>
+    <string name="reg">Зарегистрироваться</string>
+
+</resources>
