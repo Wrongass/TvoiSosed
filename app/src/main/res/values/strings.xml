@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">Moi Sosed</string>
+    <string name="app_name">Твой сосед</string>
     <string name="login">Войти</string>
     <string name="mail">Введите e-mail</string>
     <string name="pass">Введите пароль</string>
     <string name="reg">Зарегистрироваться</string>
-
+    <string name="repeat_pass">Повторите пароль</string>
+    <string name="user_name">Алла Соседова</string>
+    <string name="passport_confirm">Паспорт подтвержден</string>
+    <string name="card_confirm">Карта подтверждена</string>
+    <string name="phone">Номер телефона</string>
 </resources>
