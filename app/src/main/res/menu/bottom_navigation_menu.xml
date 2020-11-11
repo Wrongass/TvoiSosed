@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/search"
         android:icon="@drawable/search"
         android:title=""/>
     <item
+        android:id="@+id/favorite"
         android:icon="@drawable/favorite"
         android:title=""/>
     <item
+        android:id="@+id/ads"
         android:icon="@drawable/ads"
         android:title=""/>
     <item
+        android:id="@+id/message"
         android:icon="@drawable/message"
         android:title=""/>
     <item
+        android:id="@+id/profile"
         android:icon="@drawable/profile"
         android:title=""/>
 

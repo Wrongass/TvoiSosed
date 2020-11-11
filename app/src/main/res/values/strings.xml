@@ -2,11 +2,16 @@
     <string name="app_name">Твой сосед</string>
     <string name="login">Войти</string>
     <string name="mail">Введите e-mail</string>
+    <string name="email">example@gmail.com</string>
     <string name="pass">Введите пароль</string>
     <string name="reg">Зарегистрироваться</string>
     <string name="repeat_pass">Повторите пароль</string>
     <string name="user_name">Алла Соседова</string>
-    <string name="passport_confirm">Паспорт подтвержден</string>
+    <string name="acc_status">ПОДТВЕРЖДЁН</string>
     <string name="card_confirm">Карта подтверждена</string>
-    <string name="phone">Номер телефона</string>
+    <string name="phone">+79090041745</string>
+    <string name="address">Россия, г. Екатеринбург</string>
+
+
+    <string name="vkProfile">vk.com/sosedova.a</string>
 </resources>

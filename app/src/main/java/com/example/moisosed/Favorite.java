@@ -9,16 +9,16 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class UserProfile extends AppCompatActivity {
+public class Favorite extends AppCompatActivity {
 
     private BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_favorite);
         navigation = findViewById(R.id.bottom_navigation);
 
-        navigation.setSelectedItemId(R.id.profile);
+        navigation.setSelectedItemId(R.id.favorite);
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

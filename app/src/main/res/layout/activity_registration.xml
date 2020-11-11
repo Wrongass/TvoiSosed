@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@color/white"
     tools:context=".Registration">
 
 
@@ -17,9 +17,6 @@
         android:layout_gravity="center"
         android:layout_marginBottom="200dp"
         app:srcCompat="@drawable/logo" />
-    <!--
-        android:textColorHint="#000000"
-    -->
 
     <EditText
         android:id="@+id/mail"
@@ -56,6 +53,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
+        android:backgroundTint="#42aaff"
         android:text="@string/reg" />
+
 
 </FrameLayout>

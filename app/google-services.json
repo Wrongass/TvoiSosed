@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "639296053891",
+    "firebase_url": "https://tvoi-sosed.firebaseio.com",
+    "project_id": "tvoi-sosed",
+    "storage_bucket": "tvoi-sosed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639296053891:android:68af345466d200ec1cf1b6",
+        "android_client_info": {
+          "package_name": "com.example.moisosed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639296053891-07tq2vqq8ekh09tvjamnh1un1i0hhg76.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moisosed",
+            "certificate_hash": "3c77c8a190a8922a192708e869ec45b4e6981e4f"
+          }
+        },
+        {
+          "client_id": "639296053891-m74s6nterhe07avktnbljirenoup7oum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWw7_mE_bE00jgruFpUVnA4z_EXSNHX3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639296053891-m74s6nterhe07avktnbljirenoup7oum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

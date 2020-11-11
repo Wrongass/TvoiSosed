@@ -9,16 +9,16 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class UserProfile extends AppCompatActivity {
+public class List extends AppCompatActivity {
 
     private BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_list);
         navigation = findViewById(R.id.bottom_navigation);
 
-        navigation.setSelectedItemId(R.id.profile);
+        navigation.setSelectedItemId(R.id.search);
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -33,9 +33,9 @@ public class UserProfile extends AppCompatActivity {
                     case R.id.favorite:
                         openFavorite();
                         break;
-                    case R.id.ads:
-                        openAds();
-                        break;
+                        case R.id.ads:
+                            openAds();
+                            break;
                     case R.id.message:
                         openMessage();
                         break;
@@ -69,4 +69,4 @@ public class UserProfile extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
-}
+    }
