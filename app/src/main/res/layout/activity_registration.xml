@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/mail"
+        android:id="@+id/mail_reg"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
@@ -27,28 +27,53 @@
         android:ems="10"
         android:hint="@string/mail"
         android:inputType="textPersonName" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_mail_error"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="18dp"
+        app:errorTextColor="@color/colorRed"/>
+
     <EditText
-        android:id="@+id/pass"
+        android:id="@+id/pass_reg"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginBottom="-20dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:hint="@string/pass" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_pass_error"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="-52dp"
+        app:errorTextColor="@color/colorRed"/>
+
     <EditText
-        android:id="@+id/repeat_pass"
+        android:id="@+id/repeat_pass_reg"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginBottom="-90dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:hint="@string/repeat_pass" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_repeat_pass_error"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="-118dp"
+        app:errorTextColor="@color/colorRed"/>
+
     <Button
-        android:id="@+id/reg"
+        android:id="@+id/reg2"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

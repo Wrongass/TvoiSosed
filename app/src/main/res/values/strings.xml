@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Твой сосед</string>
     <string name="login">Войти</string>
-    <string name="mail">Введите e-mail</string>
+    <string name="mail">Введите email</string>
     <string name="email">example@gmail.com</string>
     <string name="pass">Введите пароль</string>
     <string name="reg">Зарегистрироваться</string>
