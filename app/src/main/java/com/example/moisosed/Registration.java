@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -59,7 +62,7 @@ public class Registration extends AppCompatActivity {
             String password = strings[1];
             OkHttpClient okHttpClient = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.register\",\r\n\t\t\"params\": {\r\n            \"login\": \"" + email + "\",\r\n            \"password\": \"" + password + "\"\r\n        },\r\n        \"id\": null\r\n}");
+            RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.register\",\r\n\t\t\"params\": {\r\n            \"login\": \"" + email + "\",\r\n            \"password\": \"" + password + "\"\r\n        },\r\n        \"id\": 22\r\n}");
             Request request = new Request.Builder()
                     .url("http://cj50586.tmweb.ru")
                     .post(body)
@@ -69,6 +72,8 @@ public class Registration extends AppCompatActivity {
                 if (response.isSuccessful()){
                     String result = response.body().string();
                     if(result.contains("token")){
+                        Token token = new Token();
+                        token.setTokens(result);
                         Intent i = new Intent(Registration.this, UserProfile.class);
                         startActivity(i);
                         overridePendingTransition(0, 0);
@@ -86,10 +91,10 @@ public class Registration extends AppCompatActivity {
                                 });
                             }
                         }.start();
-
+                        finish();
                     }
                 }
-            } catch (IOException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;

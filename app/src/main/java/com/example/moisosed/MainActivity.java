@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity  {
     private Button login, reg;
     private EditText mail, pass;
     private TextInputLayout textInputEmail, textInputPass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +62,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-    public void openUserProfile(){
-        Intent intent = new Intent(this, UserProfile.class);
-        startActivity(intent);
-        overridePendingTransition(0, 0);
-    }
 
     public void openRegistration(){
         Intent intent = new Intent(this, Registration.class);
@@ -86,9 +86,23 @@ public class MainActivity extends AppCompatActivity  {
                 if (response.isSuccessful()){
                     String result = response.body().string();
                     if(result.contains("token")){
+                        Token token = new Token();
+                        token.setTokens(result);
                         Intent i = new Intent(MainActivity.this, UserProfile.class);
                         startActivity(i);
                         overridePendingTransition(0, 0);
+                        new Thread()
+                        {
+                            public void run()
+                            {
+                                MainActivity.this.runOnUiThread(new Runnable()
+                                {
+                                    public void run()
+                                    {
+                                        Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();                                    }
+                                });
+                            }
+                        }.start();
                         finish();
                     }else{
                         new Thread()
@@ -104,10 +118,10 @@ public class MainActivity extends AppCompatActivity  {
                                 });
                             }
                         }.start();
-
+                        finish();
                     }
                 }
-            } catch (IOException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;

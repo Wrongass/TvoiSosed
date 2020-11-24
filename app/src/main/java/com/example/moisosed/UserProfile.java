@@ -9,17 +9,28 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class UserProfile extends AppCompatActivity {
 
     private BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Token token = new Token();
+        try {
+            token.checkTokens();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         navigation = findViewById(R.id.bottom_navigation);
-
         navigation.setSelectedItemId(R.id.profile);
-
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -66,6 +77,11 @@ public class UserProfile extends AppCompatActivity {
     }
     public void openMessage(){
         Intent intent = new Intent(this, MessageActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
