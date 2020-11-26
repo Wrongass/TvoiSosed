@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity  {
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.login\",\r\n\t\t\"params\": {\r\n            \"login\": \"" + email + "\",\r\n            \"password\": \"" + password + "\"\r\n        },\r\n        \"id\": null\r\n}");
             Request request = new Request.Builder()
-                    .url("http://cj50586.tmweb.ru")
+                    .url(Token.url)
                     .post(body)
                     .build();
             try {

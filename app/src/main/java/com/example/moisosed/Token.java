@@ -12,8 +12,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Token {
-    private String accessToken, accessTokenTime, refreshToken, refreshTokenTime;
-    public void setTokens(String result) throws JSONException {
+    private static String accessToken, accessTokenTime, refreshToken, refreshTokenTime;
+    public final static String url = "http://cj50586.tmweb.ru/test";
+    public static void setTokens(String result) throws JSONException {
         JSONObject jsonResponse = new JSONObject(result);
         JSONObject jsonResult = jsonResponse.getJSONObject("result");
         JSONObject jsonAccessToken = jsonResult.getJSONObject("accessToken");
@@ -23,25 +24,20 @@ public class Token {
         refreshToken = jsonRefreshToken.getString("token");
         refreshTokenTime = jsonRefreshToken.getString("expirationTime");
     }
-    public String getAccessToken(){
+
+    public static String getAccessToken(){
         return accessToken;
     }
-    public String getAccessTokenTime(){
-        return accessTokenTime;
-    }
-    public String getRefreshToken(){
-        return refreshToken;
-    }
-    public String getRefreshTokenTime(){
-        return refreshTokenTime;
-    }
+    public static String getUrl(){
+        return url; }
+
     public void doRefreshToken() throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.refresh\",\r\n\t\t\"params\": {\r\n            \"refreshToken\": " + refreshToken +"\r\n        },\r\n        \"id\": null\r\n}");
         Request request = new Request.Builder()
-                .url("http://cj50586.tmweb.ru")
+                .url(url)
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
@@ -49,12 +45,13 @@ public class Token {
         String result = response.body().string();
         setTokens(result);
     }
+    
     public boolean checkTokens() throws IOException, JSONException {
         boolean isRelevant = false;
         Long unixTime = System.currentTimeMillis() / 1000;
-        if(unixTime - Long.parseLong(accessTokenTime) < 10){
+        if(Long.parseLong(accessTokenTime) - unixTime < 10){
             doRefreshToken();
-            if (unixTime - Long.parseLong(refreshTokenTime) < 10){
+            if (Long.parseLong(refreshTokenTime) - unixTime < 10){
                 UserProfile userProfile = new UserProfile();
                 userProfile.openMainActivity();
             }
