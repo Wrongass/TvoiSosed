@@ -8,31 +8,31 @@
     tools:context=".MainActivity">
 
 
-    <ImageView
-        android:id="@+id/face"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="-220dp"
-        android:layout_marginStart="98dp"
-        app:srcCompat="@drawable/face" />
+<!--    <ImageView-->
+<!--        android:id="@+id/face"-->
+<!--        android:layout_width="55dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginBottom="-220dp"-->
+<!--        android:layout_marginStart="98dp"-->
+<!--        app:srcCompat="@drawable/face" />-->
 
-    <ImageView
-        android:id="@+id/gmail"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="-220dp"
-        app:srcCompat="@drawable/gmail" />
+<!--    <ImageView-->
+<!--        android:id="@+id/gmail"-->
+<!--        android:layout_width="55dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginBottom="-220dp"-->
+<!--        app:srcCompat="@drawable/gmail" />-->
 
-    <ImageView
-        android:id="@+id/vk"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="-220dp"
-        android:layout_marginStart="-98dp"
-        app:srcCompat="@drawable/vk" />
+<!--    <ImageView-->
+<!--        android:id="@+id/vk"-->
+<!--        android:layout_width="55dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginStart="-98dp"-->
+<!--        android:layout_marginBottom="-220dp"-->
+<!--        app:srcCompat="@drawable/vk" />-->
 
     <ImageView
         android:id="@+id/logo"
@@ -49,6 +49,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:backgroundTint="#42aaff"
+        android:textAllCaps="false"
         android:text="@string/login" />
 
     <EditText
@@ -94,6 +95,7 @@
     android:layout_height="50dp"
     android:layout_gravity="center"
     android:layout_marginTop="150dp"
+        android:textAllCaps="false"
     android:text="@string/reg"
         android:backgroundTint="#42aaff"/>
 

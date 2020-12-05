@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/edit_profile_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.moisosed.UserProfileEdit">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rellay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/grad"
+                android:paddingBottom="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/imgUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circle_border">
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_margin="9dp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/circle"
+                        android:padding="3dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/a" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linlay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rellay1"
+                android:orientation="horizontal">
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="70dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Имя"
+                            android:textColor="@color/headings"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edit_profile_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:inputType="textPersonName" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/name_error_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            app:errorTextColor="@color/colorRed">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="0dp"
+                                android:layout_height="0dp">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Фамилия"
+                            android:textColor="@color/headings"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edit_profile_surname"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:inputType="textPersonName" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/surname_error_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            app:errorTextColor="@color/colorRed">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="0dp"
+                                android:layout_height="0dp">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Возраст"
+                            android:textColor="@color/headings"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edit_profile_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:inputType="number" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/edit_profile_age_error"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            app:errorTextColor="@color/colorRed"
+                            app:helperText="Регистрация доступна с 18 лет">
+
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="0dp"
+                                android:layout_height="0dp">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Пол"
+                            android:textColor="@color/headings"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <RadioGroup
+                            android:id="@+id/sex_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/male_edit_profile"
+                                android:layout_width="180dp"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="Мужской" />
+
+                            <RadioButton
+                                android:id="@+id/female_edit_profile"
+                                android:layout_width="180dp"
+                                android:layout_height="wrap_content"
+                                android:text="Женский" />
+                        </RadioGroup>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Обо мне"
+                            android:textColor="@color/headings"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_profile_about_myself"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/about_myself"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="Расскажите о себе..."
+                            android:maxLength="3000"
+                            android:paddingStart="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="6dp"
+                            android:textColor="#000000"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="280dp"
+                                android:layout_height="20dp"
+                                android:orientation="horizontal"
+                                app:errorTextColor="@color/colorRed"
+                                app:helperText="Необязательное поле">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp">
+
+                                </com.google.android.material.textfield.TextInputEditText>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <TextView
+                                android:id="@+id/edit_profile_counter_about_myself"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Контактные данные"
+                            android:textColor="@color/headings"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Телефон"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/edit_profile_phoneNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="0dp"
+                                android:fontFamily="sans-serif-light"
+                                android:hint="89ХХХХХХХХХ"
+                                android:inputType="number" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/edit_profile_phone_error"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            app:errorTextColor="@color/colorRed"
+                            app:helperText="Введите номер без + - и ( )">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="0dp"
+                                android:layout_height="0dp">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ссылка на страницу в соц.сети"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edit_profile_socialUrl"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="0dp"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="vk.com/id"
+                            android:inputType="textUri"
+                            android:maxLength="100" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="280dp"
+                            android:layout_height="20dp"
+                            android:orientation="horizontal"
+                            app:errorTextColor="@color/colorRed"
+                            app:helperText="Необязательное поле">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="0dp"
+                                android:layout_height="0dp">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/socialUrl_counter_edit_profile"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <!--            <LinearLayout-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginTop="15dp"-->
+                    <!--                android:orientation="vertical">-->
+
+                    <!--                <TextView-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:text="Facebook"-->
+                    <!--                    android:textColor="@color/headings"-->
+                    <!--                    android:textSize="13sp" />-->
+
+                    <!--                <TextView-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:fontFamily="sans-serif-light"-->
+                    <!--                    android:text="facebook.com/alla.s"-->
+                    <!--                    android:textColor="#000000"-->
+                    <!--                    android:textSize="18sp" />-->
+
+
+                    <!--            </LinearLayout>-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Почта"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp" />
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edit_profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="0dp"
+                            android:fontFamily="sans-serif-light"
+                            android:hint="example@email.ru"
+                            android:inputType="textUri" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/email_error_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            app:errorTextColor="@color/colorRed">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="0dp"
+                                android:layout_height="0dp">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/predpoch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Дополнительная информация"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                    <Button
+                        android:id="@+id/edit_profile_save_changes"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:backgroundTint="#42aaff"
+                        android:gravity="center"
+                        android:text="Сохранить изменения"
+                        android:textAllCaps="false"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/snow"
+        android:elevation="4dp"
+        app:menu="@menu/bottom_navigation_menu" />
+
+
+</RelativeLayout>

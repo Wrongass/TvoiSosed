@@ -79,6 +79,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
         android:backgroundTint="#42aaff"
+        android:textAllCaps="false"
         android:text="@string/reg" />
 
 

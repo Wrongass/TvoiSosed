@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -14,17 +15,27 @@ import org.json.JSONException;
 import java.io.IOException;
 
 public class UserProfile extends AppCompatActivity {
+    private static String id, name, surname, age, socialUrl, sex, specialities, email, phone;
+    private static boolean animals, children, music, russian_language, smoking;
 
     private BottomNavigationView navigation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Token token = new Token();
         try {
-            token.checkTokens();
+            token.checkTokens(getApplicationContext());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+        new AccountSelfInfo().execute("", "");
+        AccountSelfInfo accountSelfInfo = new AccountSelfInfo();
+        name = accountSelfInfo.getName();
+        if(name == null){
+            openUserProfileEdit();
         }
 
         super.onCreate(savedInstanceState);
@@ -34,7 +45,7 @@ public class UserProfile extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.search:
                         openSearch();
                         break;
@@ -55,34 +66,47 @@ public class UserProfile extends AppCompatActivity {
             }
         });
     }
+
     public void openSearch() {
         Intent intent = new Intent(this, List.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
-    public void openUserProfile(){
+
+    public void openUserProfile() {
         Intent intent = new Intent(this, UserProfile.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
-    public void openFavorite(){
+
+    public void openUserProfileEdit() {
+        Intent intent = new Intent(this, UserProfileEdit.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
+
+    public void openFavorite() {
         Intent intent = new Intent(this, Favorite.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
-    public void openAds(){
+
+    public void openAds() {
         Intent intent = new Intent(this, Ads.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
-    public void openMessage(){
+
+    public void openMessage() {
         Intent intent = new Intent(this, MessageActivity.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
-    public void openMainActivity(){
+
+    public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
+
 }

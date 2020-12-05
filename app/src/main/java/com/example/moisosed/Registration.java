@@ -46,9 +46,9 @@ public class Registration extends AppCompatActivity {
                 String email = mail_reg.getText().toString();
                 String password = pass_reg.getText().toString();
                 Validation validation = new Validation();
-                if (validation.validateEmail(textInputEmail, mail_reg) & validation.validatePassword(textInputPass, pass_reg) & validation.validateRepeatPassword(textInputRepeatPass,  pass_reg, repeat_pass_reg)) {
+//                if (validation.validateEmail(textInputEmail, mail_reg) & validation.validatePassword(textInputPass, pass_reg) & validation.validateRepeatPassword(textInputRepeatPass,  pass_reg, repeat_pass_reg)) {
                     new RegistrationUser().execute(email, password);
-                }
+//                }
             }
         });
 
@@ -62,10 +62,11 @@ public class Registration extends AppCompatActivity {
             String password = strings[1];
             OkHttpClient okHttpClient = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.register\",\r\n\t\t\"params\": {\r\n            \"login\": \"" + email + "\",\r\n            \"password\": \"" + password + "\"\r\n        },\r\n        \"id\": 22\r\n}");
+            RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.register\",\r\n\t\t\"params\": {\r\n            \"login\": \"" + email + "\",\r\n            \"password\": \"" + password + "\",\r\n            \"longLiving\": true\r\n        },\r\n        \"id\": null\r\n}");
             Request request = new Request.Builder()
                     .url(Token.url)
                     .post(body)
+                    .addHeader("Content-Type", "application/json")
                     .build();
             try {
                 Response response = okHttpClient.newCall(request).execute();
@@ -78,20 +79,26 @@ public class Registration extends AppCompatActivity {
                         startActivity(i);
                         overridePendingTransition(0, 0);
                         finish();
-                    }else{
-                        new Thread()
-                        {
-                            public void run()
-                            {
-                                Registration.this.runOnUiThread(new Runnable()
-                                {
-                                    public void run()
-                                    {
-                                        Toast.makeText(Registration.this, result, Toast.LENGTH_LONG).show();                                    }
+                    } else if (result.contains("\"code\":9")){
+                        new Thread() {
+                            public void run() {
+                                Registration.this.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        textInputEmail.setError("Указанный email уже зарегистрирован");
+                                    }
                                 });
                             }
                         }.start();
-                        finish();
+                    } else{
+                        new Thread() {
+                            public void run() {
+                                Registration.this.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        textInputEmail.setError("Сервер недоступен, попробуйте позднее");
+                                    }
+                                });
+                            }
+                        }.start();
                     }
                 }
             } catch (IOException | JSONException e) {

@@ -13,14 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoiSosed"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Validation"></activity>
-        <activity android:name=".MessageActivity" />
-        <activity android:name=".Ads" />
-        <activity android:name=".Favorite" />
-        <activity android:name=".List" />
-        <activity android:name=".Registration" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Validation"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".MessageActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".Ads"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".Favorite"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".List"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".Registration"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".UserProfile"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".UserProfileEdit"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

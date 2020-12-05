@@ -26,7 +26,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private Button login, reg;
     private EditText mail, pass;
@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity  {
                 String email = mail.getText().toString();
                 String password = pass.getText().toString();
                 Validation validation = new Validation();
-                if (validation.validateEmail(textInputEmail, mail) & validation.validatePassword(textInputPass, pass)){
+//                if (validation.validateEmail(textInputEmail, mail) & validation.validatePassword(textInputPass, pass)) {
                     new LoginUser().execute(email, password);
-                }
+//                }
             }
         });
         reg = (Button) findViewById(R.id.reg2);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity  {
         });
     }
 
-    public void openRegistration(){
+    public void openRegistration() {
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
@@ -71,55 +71,60 @@ public class MainActivity extends AppCompatActivity  {
 
     public class LoginUser extends AsyncTask<String, Void, String> {
         @Override
-        protected String doInBackground(String... strings){
+        protected String doInBackground(String... strings) {
             String email = strings[0];
             String password = strings[1];
             OkHttpClient okHttpClient = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.login\",\r\n\t\t\"params\": {\r\n            \"login\": \"" + email + "\",\r\n            \"password\": \"" + password + "\"\r\n        },\r\n        \"id\": null\r\n}");
+            RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.login\",\r\n\t\t\"params\": {\r\n            \"login\": \"" + email + "\",\r\n            \"password\": \"" + password + "\",\r\n            \"longLiving\": true\r\n        },\r\n        \"id\": null\r\n}");
             Request request = new Request.Builder()
                     .url(Token.url)
                     .post(body)
+                    .addHeader("Content-Type", "application/json")
                     .build();
             try {
                 Response response = okHttpClient.newCall(request).execute();
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     String result = response.body().string();
-                    if(result.contains("token")){
+                    if (result.contains("token")) {
                         Token token = new Token();
                         token.setTokens(result);
+                        token.saveTokens(getApplicationContext());
                         Intent i = new Intent(MainActivity.this, UserProfile.class);
                         startActivity(i);
                         overridePendingTransition(0, 0);
-                        new Thread()
-                        {
-                            public void run()
-                            {
-                                MainActivity.this.runOnUiThread(new Runnable()
-                                {
-                                    public void run()
-                                    {
-                                        Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();                                    }
+                    } else if (result.contains("\"code\":2")){
+                        new Thread() {
+                            public void run() {
+                                MainActivity.this.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        textInputEmail.setError("Неверный email");
+                                    }
                                 });
                             }
                         }.start();
-                        finish();
-                    }else{
-                        new Thread()
-                        {
-                            public void run()
-                            {
-                                MainActivity.this.runOnUiThread(new Runnable()
-                                {
-                                    public void run()
-                                    {
-                                        textInputEmail.setError("Неправильный email или пароль");
-                                        Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();                                    }
+                    } else if (result.contains("\"code\":101")){
+                        new Thread() {
+                            public void run() {
+                                MainActivity.this.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        textInputPass.setError("Неверный пароль");
+                                    }
                                 });
                             }
                         }.start();
-                        finish();
                     }
+                } else {
+                    new Thread() {
+                        public void run() {
+                            MainActivity.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    textInputEmail.setError("Сервер недоступен, попробуйте позже");
+                                    Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    }.start();
                 }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();

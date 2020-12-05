@@ -1,5 +1,8 @@
 package com.example.moisosed;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,10 +14,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+
+
+
 public class Token {
+    private static SharedPreferences tokenPref;
     private static String accessToken, accessTokenTime, refreshToken, refreshTokenTime;
     public final static String url = "http://cj50586.tmweb.ru/test";
-    public static void setTokens(String result) throws JSONException {
+
+    public void setTokens(String result) throws JSONException {
         JSONObject jsonResponse = new JSONObject(result);
         JSONObject jsonResult = jsonResponse.getJSONObject("result");
         JSONObject jsonAccessToken = jsonResult.getJSONObject("accessToken");
@@ -25,11 +33,17 @@ public class Token {
         refreshTokenTime = jsonRefreshToken.getString("expirationTime");
     }
 
-    public static String getAccessToken(){
+    public static String getAccessToken() {
         return accessToken;
     }
-    public static String getUrl(){
-        return url; }
+
+    public static void saveTokens(Context context){
+        tokenPref = context.getSharedPreferences("RefreshToken", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = tokenPref.edit();
+        editor.putString("refreshToken", refreshToken);
+        editor.putString("refreshTokenTime", refreshTokenTime);
+        editor.commit();
+    }
 
     public void doRefreshToken() throws IOException, JSONException {
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -46,15 +60,25 @@ public class Token {
         setTokens(result);
     }
     
-    public boolean checkTokens() throws IOException, JSONException {
-        boolean isRelevant = false;
+    public boolean checkTokens(Context context) throws IOException, JSONException {
+        boolean isRelevant = true;
         Long unixTime = System.currentTimeMillis() / 1000;
         if(Long.parseLong(accessTokenTime) - unixTime < 10){
-            doRefreshToken();
+            if (Long.parseLong(refreshTokenTime) - unixTime < 10){
+                UserProfile userProfile = new UserProfile();
+                userProfile.openMainActivity();
+            } else {
+                doRefreshToken();
+            }
+        } else {
+            SharedPreferences tokenPref = context.getApplicationContext().getSharedPreferences("RefreshToken", Context.MODE_PRIVATE);
+            refreshToken = tokenPref.getString("refreshToken", "");
+            refreshTokenTime = tokenPref.getString("refreshTokenTime", "");
             if (Long.parseLong(refreshTokenTime) - unixTime < 10){
                 UserProfile userProfile = new UserProfile();
                 userProfile.openMainActivity();
             }
+
         }
         return isRelevant;
     }
