@@ -14,14 +14,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class AccountSelfInfo extends AsyncTask<String, Void, String> {
+public class AccountSelfInfo extends AsyncTask<String, Void, Boolean> {
     private static String id, name, surname, age, socialUrl, sex, about, specialities, email, phone = null;
-    private static boolean animals, children, music, russian_language, smoking = false;
+    private static boolean animals, children, music, russian_language, smoking, registered;
 
 
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected Boolean doInBackground(String... strings) {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
@@ -38,12 +38,17 @@ public class AccountSelfInfo extends AsyncTask<String, Void, String> {
                 String result = response.body().string();
                 if (result.contains("name")) {
                     jsonParsing(result);
+                    if (name == null) {
+                        registered = false;
+                    } else {
+                        registered = true;
+                    }
                 }
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return registered;
     }
 
 
@@ -58,6 +63,8 @@ public class AccountSelfInfo extends AsyncTask<String, Void, String> {
         socialUrl = jsonResult.getString("socialUrl");
         sex = jsonResult.getString("sex");
         about = jsonResult.getString("about");
+        email = jsonResult.getString("email");
+        phone = jsonResult.getString("phone");
         JSONArray specialitiesArray = jsonResult.getJSONArray("specialities");
         if (specialitiesArray.getJSONObject(0).getString("status") == "true"){
             animals = true;
@@ -74,6 +81,21 @@ public class AccountSelfInfo extends AsyncTask<String, Void, String> {
         if (specialitiesArray.getJSONObject(4).getString("status") == "true"){
             smoking = true;
         } else { smoking = false;}
+    }
+    public static void setAllNull(){
+        id = null;
+        name = null;
+        surname = null;
+        age = null;
+        socialUrl = null;
+        sex = null;
+        phone = null;
+        about = null;
+        animals = false;
+        children = false;
+        music = false;
+        russian_language = false;
+        smoking = false;
     }
 
     public static String getId() {
@@ -123,12 +145,6 @@ public class AccountSelfInfo extends AsyncTask<String, Void, String> {
     public static void setSex(String sex) {
         AccountSelfInfo.sex = sex;
     }
-
-    public static String getSpecialities() {
-        return specialities;
-    }
-
-    public static void setSpecialities(String specialities) { AccountSelfInfo.specialities = specialities; }
 
     public static String getEmail() {
         return email;

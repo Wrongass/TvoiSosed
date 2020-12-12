@@ -44,113 +44,112 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgUser"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0sp"
             android:fontFamily="sans-serif-light"
-            android:text="@string/user_name"
             android:textColor="@color/white"
             android:textSize="32sp" />
 
 
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_name"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif"
-            android:text="@string/address"
-            android:textColor="@color/address"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_address"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/tv_name"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:text="@string/address"-->
+<!--            android:textColor="@color/address"-->
+<!--            android:textSize="14sp" />-->
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/linlay1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rellay1"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linlay1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/rellay1"-->
+<!--        android:orientation="horizontal">-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/followersBg"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/followersBg"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingBottom="5dp"-->
+<!--            android:paddingTop="5dp">-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Пользователь"
-                    android:textColor="@color/white"
-                    android:textSize="21sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:text="Пользователь"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="21sp" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Подтвержден"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="17sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:text="Подтвержден"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="17sp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/followingBg"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/followingBg"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingBottom="5dp"-->
+<!--            android:paddingTop="5dp">-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Был в сети"
-                    android:textColor="@color/white"
-                    android:textSize="21sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:text="Был в сети"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="21sp" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textStyle="bold"
-                    android:text="15 минут назад"
-                    android:textColor="@color/white"
-                    android:textSize="17sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:text="15 минут назад"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="17sp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 
     <RelativeLayout
@@ -181,11 +180,12 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/profile_about"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:hint="Информация отсутствует"
                     android:layout_marginTop="5dp"
                     android:fontFamily="sans-serif-light"
-                    android:text="Мне 24, я из Уфы. Приехала в Екатеринбург для поступление в университет. Люблю все виды искусства, сама играю на гитаре. Ищу общительную и веселую соседку для совместного поиска квартиры."
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -222,67 +222,94 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Ссылка на страницу в соц.сети"
+                    android:textColor="@color/headings"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/profile_socialUrl"
+                    android:layout_marginTop="5dp"
+                    android:hint="Информация отсутствует"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Телефон"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/profile_phone"
+                    android:hint="Информация отсутствует"
+                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/phone"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Вконтакте"
-                    android:textColor="@color/headings"
-                    android:textSize="13sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Вконтакте"-->
+<!--                    android:textColor="@color/headings"-->
+<!--                    android:textSize="13sp" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/vkProfile"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Facebook"
-                    android:textColor="@color/headings"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="facebook.com/alla.s"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:text="@string/vkProfile"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
 
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Facebook"-->
+<!--                    android:textColor="@color/headings"-->
+<!--                    android:textSize="13sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="sans-serif-light"-->
+<!--                    android:text="facebook.com/alla.s"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -298,10 +325,10 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/email"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -324,27 +351,10 @@
                     android:id="@+id/predpoch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Предпочтения"
+                    android:text="Дополнительная информация"
                     android:textStyle="bold"
                     android:textColor="@color/headings"
-                    android:textSize="13sp" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="sans-serif-light"
-                    android:text="text1"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="text2"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
 
                 <View
@@ -355,30 +365,6 @@
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Дата регистрации"
-                    android:textStyle="bold"
-                    android:textColor="@color/headings"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="23.12.2016"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
 
 
         </LinearLayout>

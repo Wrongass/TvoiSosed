@@ -2,11 +2,14 @@ package com.example.moisosed;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -18,8 +21,19 @@ import okhttp3.Response;
 
 
 public class Token {
+    public static SharedPreferences getTokenPref() {
+        return tokenPref;
+    }
+
+    public static void setTokenPref(SharedPreferences tokenPref) {
+        Token.tokenPref = tokenPref;
+    }
+
     private static SharedPreferences tokenPref;
-    private static String accessToken, accessTokenTime, refreshToken, refreshTokenTime;
+    private static String accessToken;
+    private static String accessTokenTime;
+    private static String refreshToken;
+    private static String refreshTokenTime;
     public final static String url = "http://cj50586.tmweb.ru/test";
 
     public void setTokens(String result) throws JSONException {
@@ -45,8 +59,10 @@ public class Token {
         editor.commit();
     }
 
-    public void doRefreshToken() throws IOException, JSONException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+
+    // удалить как перестанет быть нужным
+    public void doRefreshToken() throws JSONException {
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.refresh\",\r\n\t\t\"params\": {\r\n            \"refreshToken\": " + refreshToken +"\r\n        },\r\n        \"id\": null\r\n}");
@@ -55,31 +71,84 @@ public class Token {
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
-        Response response = client.newCall(request).execute();
-        String result = response.body().string();
-        setTokens(result);
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String result = response.body().string();
+                if (result.contains("token")) {
+                    setTokens(result);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
-    public boolean checkTokens(Context context) throws IOException, JSONException {
+    public boolean checkTokens(Context context) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
         boolean isRelevant = true;
         Long unixTime = System.currentTimeMillis() / 1000;
-        if(Long.parseLong(accessTokenTime) - unixTime < 10){
-            if (Long.parseLong(refreshTokenTime) - unixTime < 10){
+        if (accessTokenTime != null && refreshTokenTime != null){
+        if(Long.parseLong(accessTokenTime) - unixTime < 10) {
+            if (Long.parseLong(refreshTokenTime) - unixTime < 10) {
                 UserProfile userProfile = new UserProfile();
                 userProfile.openMainActivity();
             } else {
-                doRefreshToken();
+                UserProfile userProfile = new UserProfile();
+                if (!userProfile.doRefreshToken()){
+                    isRelevant = false;
+                } else {
+                    saveTokens(context);
+                }
             }
+        }
         } else {
             SharedPreferences tokenPref = context.getApplicationContext().getSharedPreferences("RefreshToken", Context.MODE_PRIVATE);
-            refreshToken = tokenPref.getString("refreshToken", "");
-            refreshTokenTime = tokenPref.getString("refreshTokenTime", "");
-            if (Long.parseLong(refreshTokenTime) - unixTime < 10){
-                UserProfile userProfile = new UserProfile();
-                userProfile.openMainActivity();
+            refreshToken = tokenPref.getString("refreshToken", null);
+            refreshTokenTime = tokenPref.getString("refreshTokenTime", null);
+            if (refreshTokenTime != null) {
+                if (Long.parseLong(refreshTokenTime) - unixTime < 10) {
+                    isRelevant = false;
+                } else {
+                    UserProfile userProfile = new UserProfile();
+                    if (!userProfile.doRefreshToken()){
+                        isRelevant = false;
+                    } else {
+                        saveTokens(context);
+                    }
+                }
+            } else {
+                isRelevant = false;
             }
 
         }
         return isRelevant;
+    }
+
+    public static void setAccessToken(String accessToken) {
+        Token.accessToken = accessToken;
+    }
+
+    public static String getAccessTokenTime() {
+        return accessTokenTime;
+    }
+
+    public static void setAccessTokenTime(String accessTokenTime) {
+        Token.accessTokenTime = accessTokenTime;
+    }
+
+    public static String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public static void setRefreshToken(String refreshToken) {
+        Token.refreshToken = refreshToken;
+    }
+
+    public static String getRefreshTokenTime() {
+        return refreshTokenTime;
+    }
+
+    public static void setRefreshTokenTime(String refreshTokenTime) {
+        Token.refreshTokenTime = refreshTokenTime;
     }
 }

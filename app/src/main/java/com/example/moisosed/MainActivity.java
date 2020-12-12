@@ -3,6 +3,8 @@ package com.example.moisosed;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentProvider;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -19,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -41,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         textInputEmail = findViewById(R.id.log_mail_error);
         textInputPass = findViewById(R.id.log_pass_error);
-
+        Token token = new Token();
+        try {
+            if(token.checkTokens(getApplicationContext())){
+            openUserProfile();
+            }
+        }  catch (JSONException | InterruptedException | ExecutionException | TimeoutException e) {
+            e.printStackTrace();
+        }
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,5 +142,16 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    public Context getApplicationContext() {
+        return super.getApplicationContext();
+    }
+
+    public void openUserProfile() {
+        Intent intent = new Intent(this, UserProfile.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 }

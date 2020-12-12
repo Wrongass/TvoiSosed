@@ -75,7 +75,11 @@ public class Registration extends AppCompatActivity {
                     if(result.contains("token")){
                         Token token = new Token();
                         token.setTokens(result);
-                        Intent i = new Intent(Registration.this, UserProfile.class);
+                        token.saveTokens(getApplicationContext());
+                        AccountSelfInfo accountSelfInfo = new AccountSelfInfo();
+                        accountSelfInfo.setAllNull();
+                        accountSelfInfo.setEmail(email);
+                        Intent i = new Intent(Registration.this, UserProfileEdit.class);
                         startActivity(i);
                         overridePendingTransition(0, 0);
                         finish();

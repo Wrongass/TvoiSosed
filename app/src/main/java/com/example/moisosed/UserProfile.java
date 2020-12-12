@@ -1,9 +1,12 @@
 package com.example.moisosed;
+import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -13,10 +16,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class UserProfile extends AppCompatActivity {
     private static String id, name, surname, age, socialUrl, sex, specialities, email, phone;
-    private static boolean animals, children, music, russian_language, smoking;
+    private static boolean animals;
+    private static boolean children;
+    private static boolean music;
+    private static boolean russian_language;
+    private static boolean smoking;
+    private static boolean successRefreshToken;
+    private static boolean registered;
 
     private BottomNavigationView navigation;
 
@@ -25,17 +37,22 @@ public class UserProfile extends AppCompatActivity {
         Token token = new Token();
         try {
             token.checkTokens(getApplicationContext());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (JSONException | InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();
         }
-
-        new AccountSelfInfo().execute("", "");
-        AccountSelfInfo accountSelfInfo = new AccountSelfInfo();
-        name = accountSelfInfo.getName();
-        if(name == null){
-            openUserProfileEdit();
+        AccountSelfInfo task = new AccountSelfInfo();
+        task.execute();
+        try {
+            // добавить восклицательный знак чтобы работало
+            if(task.get(10, TimeUnit.SECONDS)){
+                openUserProfileEdit();
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
         }
 
         super.onCreate(savedInstanceState);
@@ -107,6 +124,13 @@ public class UserProfile extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
+    }
+
+    public boolean doRefreshToken() throws InterruptedException, ExecutionException, TimeoutException {
+        RefreshToken task = new RefreshToken();
+        task.execute();
+        successRefreshToken = task.get(10, TimeUnit.SECONDS);
+        return successRefreshToken;
     }
 
 }

@@ -12,7 +12,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SaveAccountSelfInfo extends AsyncTask<Void, Void, String> {
-private String a, b;
     @Override
     protected String doInBackground(Void... voids) {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()

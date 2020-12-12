@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,6 +35,8 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.EventListener;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class UserProfileEdit extends AppCompatActivity {
     private BottomNavigationView navigation;
@@ -42,38 +45,29 @@ public class UserProfileEdit extends AppCompatActivity {
     private EditText edit_profile_name, edit_profile_about_myself, edit_profile_surname, edit_profile_age, edit_profile_socialUrl, edit_profile_email, edit_profile_phoneNumber;
     private TextView counterAboutMyself, counterSocialUrl;
     private RadioGroup sex_edit_profile;
-    private RadioButton male_edit_profile;
-
+    private RadioButton male_edit_profile, female_edit_profile;
+    private CheckBox animals_edit_profile, children_edit_profile, music_edit_profile, rus_edit_profile, smoking_edit_profile;
+    private AccountSelfInfo accountSelfInfo = new AccountSelfInfo();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile_edit);
 
-        Button saveChanges = (Button) findViewById(R.id.edit_profile_save_changes);
-        textInputPhoneError = (TextInputLayout) findViewById(R.id.edit_profile_phone_error);
-        edit_profile_about_myself = (EditText) findViewById(R.id.edit_profile_about_myself);
-        counterAboutMyself = (TextView) findViewById(R.id.edit_profile_counter_about_myself);
-        counterSocialUrl = (TextView) findViewById(R.id.socialUrl_counter_edit_profile);
-        edit_profile_name = (EditText) findViewById(R.id.edit_profile_name);
-        edit_profile_surname = (EditText) findViewById(R.id.edit_profile_surname);
-        edit_profile_age = (EditText) findViewById(R.id.edit_profile_age);
-        edit_profile_socialUrl = (EditText) findViewById(R.id.edit_profile_socialUrl);
-        edit_profile_email = (EditText) findViewById(R.id.edit_profile_email);
-        edit_profile_phoneNumber = (EditText) findViewById(R.id.edit_profile_phoneNumber);
-        male_edit_profile = (RadioButton) findViewById(R.id.male_edit_profile);
-        sex_edit_profile = (RadioGroup) findViewById(R.id.sex_edit_profile);
-        name_error_edit_profile = (TextInputLayout) findViewById(R.id.name_error_edit_profile);
-        surname_error_edit_profile = (TextInputLayout) findViewById(R.id.surname_error_edit_profile);
-        edit_profile_age_error = (TextInputLayout) findViewById(R.id.edit_profile_age_error);
-        email_error_edit_profile = (TextInputLayout) findViewById(R.id.email_error_edit_profile);
+        Token token = new Token();
+        try {
+            token.checkTokens(getApplicationContext());
+        } catch (JSONException | InterruptedException | ExecutionException | TimeoutException e) {
+            e.printStackTrace();
+        }
 
+
+        Button saveChanges = (Button) findViewById(R.id.edit_profile_save_changes);
+        setInfo();
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveAccountSelfInfo saveAccountSelfInfo = new SaveAccountSelfInfo();
                 Validation validation = new Validation();
-                AccountSelfInfo accountSelfInfo = new AccountSelfInfo();
                 if (accountSelfInfo.getAbout().length() == 0) {
                     accountSelfInfo.setAbout(" ");
                 }
@@ -85,7 +79,11 @@ public class UserProfileEdit extends AppCompatActivity {
                 } else {
                     accountSelfInfo.setSex("female");
                 }
-
+                accountSelfInfo.setAnimals(animals_edit_profile.isChecked());
+                accountSelfInfo.setChildren(children_edit_profile.isChecked());
+                accountSelfInfo.setMusic(music_edit_profile.isChecked());
+                accountSelfInfo.setRussian_language(rus_edit_profile.isChecked());
+                accountSelfInfo.setSmoking(smoking_edit_profile.isChecked());
 
                 accountSelfInfo.setName(edit_profile_name.getText().toString());
                 accountSelfInfo.setSurname(edit_profile_surname.getText().toString());
@@ -100,6 +98,7 @@ public class UserProfileEdit extends AppCompatActivity {
 //                        & validation.validateEmail(email_error_edit_profile, edit_profile_email)
                 ) {
                     new SaveAccountSelfInfo().execute();
+                    new SaveSpecialities().execute();
                 }
             }
         });
@@ -230,5 +229,52 @@ public class UserProfileEdit extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
+    }
+
+    public void setInfo(){
+        textInputPhoneError = (TextInputLayout) findViewById(R.id.edit_profile_phone_error);
+        edit_profile_about_myself = (EditText) findViewById(R.id.edit_profile_about_myself);
+        counterAboutMyself = (TextView) findViewById(R.id.edit_profile_counter_about_myself);
+        counterSocialUrl = (TextView) findViewById(R.id.socialUrl_counter_edit_profile);
+        edit_profile_name = (EditText) findViewById(R.id.edit_profile_name);
+        edit_profile_surname = (EditText) findViewById(R.id.edit_profile_surname);
+        edit_profile_age = (EditText) findViewById(R.id.edit_profile_age);
+        edit_profile_socialUrl = (EditText) findViewById(R.id.edit_profile_socialUrl);
+        edit_profile_email = (EditText) findViewById(R.id.edit_profile_email);
+        edit_profile_phoneNumber = (EditText) findViewById(R.id.edit_profile_phoneNumber);
+        male_edit_profile = (RadioButton) findViewById(R.id.male_edit_profile);
+        female_edit_profile = (RadioButton) findViewById(R.id.female_edit_profile);
+        sex_edit_profile = (RadioGroup) findViewById(R.id.sex_edit_profile);
+        name_error_edit_profile = (TextInputLayout) findViewById(R.id.name_error_edit_profile);
+        surname_error_edit_profile = (TextInputLayout) findViewById(R.id.surname_error_edit_profile);
+        edit_profile_age_error = (TextInputLayout) findViewById(R.id.edit_profile_age_error);
+        email_error_edit_profile = (TextInputLayout) findViewById(R.id.email_error_edit_profile);
+
+        edit_profile_name.setText(accountSelfInfo.getName());
+        edit_profile_surname.setText(accountSelfInfo.getSurname());
+        edit_profile_age.setText(accountSelfInfo.getAge());
+        String female = "female";
+        if(female.equals(accountSelfInfo.getSex())){
+            female_edit_profile.setChecked(true);
+        } else {
+            male_edit_profile.setChecked(true);
+        }
+        edit_profile_about_myself.setText(accountSelfInfo.getAbout());
+        edit_profile_phoneNumber.setText(accountSelfInfo.getPhone());
+        edit_profile_socialUrl.setText(accountSelfInfo.getSocialUrl());
+        edit_profile_email.setText(accountSelfInfo.getEmail());
+
+        animals_edit_profile = (CheckBox) findViewById(R.id.animals_edit_profile);
+        children_edit_profile = (CheckBox) findViewById(R.id.children_edit_profile);
+        music_edit_profile = (CheckBox) findViewById(R.id.music_edit_profile);
+        rus_edit_profile = (CheckBox) findViewById(R.id.rus_edit_profile);
+        smoking_edit_profile = (CheckBox) findViewById(R.id.smoking_edit_profile);
+
+        animals_edit_profile.setChecked(accountSelfInfo.isAnimals());
+        children_edit_profile.setChecked(accountSelfInfo.isChildren());
+        music_edit_profile.setChecked(accountSelfInfo.isMusic());
+        rus_edit_profile.setChecked(accountSelfInfo.isRussian_language());
+        smoking_edit_profile.setChecked(accountSelfInfo.isSmoking());
+
     }
 }

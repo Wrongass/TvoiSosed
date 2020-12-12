@@ -108,13 +108,13 @@ public class Validation extends AppCompatActivity {
             name_error_edit_profiles.setError("Поле должно быть заполнено");
             return false;
         } else if (!PASSWORD_SPACE.matcher(name).matches()) {
-            name_error_edit_profiles.setError("Имя НЕ должно содержать пробелы");
+            name_error_edit_profiles.setError("Не используйте пробелы");
             return false;
         } else if (!ONLY_LETTERS.matcher(name).matches()) {
-            name_error_edit_profiles.setError("Имя должно содержать только буквы");
+            name_error_edit_profiles.setError("Используйте только буквы");
             return false;
         } else if (!NAME_COUNT.matcher(name).matches()) {
-            name_error_edit_profiles.setError("Имя должно содержать от 2 до 30 символов");
+            name_error_edit_profiles.setError("Используйте от 2 до 30 букв");
             return false;
         }
         name_error_edit_profiles.setError(null);

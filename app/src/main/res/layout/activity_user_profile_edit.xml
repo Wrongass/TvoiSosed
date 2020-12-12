@@ -47,16 +47,6 @@
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/linlay1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rellay1"
-                android:orientation="horizontal">
-
-
-            </LinearLayout>
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -219,15 +209,16 @@
 
                             <RadioButton
                                 android:id="@+id/male_edit_profile"
-                                android:layout_width="180dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="true"
+                                android:layout_weight="1"
                                 android:text="Мужской" />
 
                             <RadioButton
                                 android:id="@+id/female_edit_profile"
-                                android:layout_width="180dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:text="Женский" />
                         </RadioGroup>
 
@@ -462,6 +453,7 @@
                             android:text="Почта"
                             android:textColor="@color/headings"
                             android:textSize="13sp" />
+
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/edit_profile_email"
                             android:layout_width="match_parent"
@@ -503,10 +495,60 @@
                             android:id="@+id/predpoch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Дополнительная информация"
+                            android:text="Дополнительная информация обо мне"
                             android:textColor="@color/headings"
                             android:textSize="13sp"
                             android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/animals_edit_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Животные" />
+
+                            <CheckBox
+                                android:id="@+id/children_edit_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.56"
+                                android:text="Дети" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/music_edit_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:text="Музыка" />
+
+                            <CheckBox
+                                android:id="@+id/rus_edit_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Русскоязычный" />
+                        </LinearLayout>
+
+                        <CheckBox
+                            android:id="@+id/smoking_edit_profile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Курение" />
 
                     </LinearLayout>
 
