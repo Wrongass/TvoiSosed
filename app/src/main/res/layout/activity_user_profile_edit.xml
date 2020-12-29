@@ -508,16 +508,16 @@
 
                             <CheckBox
                                 android:id="@+id/animals_edit_profile"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Животные" />
 
                             <CheckBox
                                 android:id="@+id/children_edit_profile"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1.56"
+                                android:layout_weight="1"
                                 android:text="Дети" />
 
 
@@ -529,26 +529,28 @@
                             android:orientation="horizontal">
 
                             <CheckBox
-                                android:id="@+id/music_edit_profile"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/smoking_edit_profile"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="Музыка" />
+                                android:layout_weight="1"
+                                android:text="Курение" />
 
                             <CheckBox
                                 android:id="@+id/rus_edit_profile"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Русскоязычный" />
                         </LinearLayout>
 
                         <CheckBox
-                            android:id="@+id/smoking_edit_profile"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/music_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_marginBottom="5dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Курение" />
+                            android:text="Слушаю музыку без наушников" />
+
 
                     </LinearLayout>
 

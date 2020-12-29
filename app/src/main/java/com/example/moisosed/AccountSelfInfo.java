@@ -15,7 +15,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class AccountSelfInfo extends AsyncTask<String, Void, Boolean> {
-    private static String id, name, surname, age, socialUrl, sex, about, specialities, email, phone = null;
+    private static String id, name, surname, age, socialUrl, sex, about, email, phone;
     private static boolean animals, children, music, russian_language, smoking, registered;
 
 
@@ -51,6 +51,9 @@ public class AccountSelfInfo extends AsyncTask<String, Void, Boolean> {
         return registered;
     }
 
+    public static boolean isRegistered() {
+        return registered;
+    }
 
     private void jsonParsing (String result) throws JSONException {
         JSONObject jsonResponse = new JSONObject(result);

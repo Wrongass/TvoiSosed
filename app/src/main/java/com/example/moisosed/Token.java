@@ -21,14 +21,6 @@ import okhttp3.Response;
 
 
 public class Token {
-    public static SharedPreferences getTokenPref() {
-        return tokenPref;
-    }
-
-    public static void setTokenPref(SharedPreferences tokenPref) {
-        Token.tokenPref = tokenPref;
-    }
-
     private static SharedPreferences tokenPref;
     private static String accessToken;
     private static String accessTokenTime;
@@ -59,30 +51,6 @@ public class Token {
         editor.commit();
     }
 
-
-    // удалить как перестанет быть нужным
-    public void doRefreshToken() throws JSONException {
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\r\n\t\t\"jsonrpc\": \"2.0\",\r\n\t\t\"method\": \"auth.refresh\",\r\n\t\t\"params\": {\r\n            \"refreshToken\": " + refreshToken +"\r\n        },\r\n        \"id\": null\r\n}");
-        Request request = new Request.Builder()
-                .url(url)
-                .method("POST", body)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        try {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.isSuccessful()) {
-                String result = response.body().string();
-                if (result.contains("token")) {
-                    setTokens(result);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     
     public boolean checkTokens(Context context) throws JSONException, InterruptedException, ExecutionException, TimeoutException {
         boolean isRelevant = true;
@@ -90,8 +58,7 @@ public class Token {
         if (accessTokenTime != null && refreshTokenTime != null){
         if(Long.parseLong(accessTokenTime) - unixTime < 10) {
             if (Long.parseLong(refreshTokenTime) - unixTime < 10) {
-                UserProfile userProfile = new UserProfile();
-                userProfile.openMainActivity();
+                isRelevant = false;
             } else {
                 UserProfile userProfile = new UserProfile();
                 if (!userProfile.doRefreshToken()){

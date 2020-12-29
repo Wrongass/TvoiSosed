@@ -46,9 +46,9 @@ public class Registration extends AppCompatActivity {
                 String email = mail_reg.getText().toString();
                 String password = pass_reg.getText().toString();
                 Validation validation = new Validation();
-//                if (validation.validateEmail(textInputEmail, mail_reg) & validation.validatePassword(textInputPass, pass_reg) & validation.validateRepeatPassword(textInputRepeatPass,  pass_reg, repeat_pass_reg)) {
+                if (validation.validateEmail(textInputEmail, mail_reg) & validation.validatePassword(textInputPass, pass_reg) & validation.validateRepeatPassword(textInputRepeatPass,  pass_reg, repeat_pass_reg)) {
                     new RegistrationUser().execute(email, password);
-//                }
+                }
             }
         });
 

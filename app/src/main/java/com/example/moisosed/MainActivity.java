@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 String email = mail.getText().toString();
                 String password = pass.getText().toString();
                 Validation validation = new Validation();
-//                if (validation.validateEmail(textInputEmail, mail) & validation.validatePassword(textInputPass, pass)) {
+                  if (validation.validateEmail(textInputEmail, mail) & validation.validatePassword(textInputPass, pass)) {
                     new LoginUser().execute(email, password);
-//                }
+                  }
             }
         });
         reg = (Button) findViewById(R.id.reg2);
@@ -142,11 +142,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-    }
-
-    @Override
-    public Context getApplicationContext() {
-        return super.getApplicationContext();
     }
 
     public void openUserProfile() {

@@ -27,6 +27,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -48,6 +49,7 @@ public class UserProfileEdit extends AppCompatActivity {
     private RadioButton male_edit_profile, female_edit_profile;
     private CheckBox animals_edit_profile, children_edit_profile, music_edit_profile, rus_edit_profile, smoking_edit_profile;
     private AccountSelfInfo accountSelfInfo = new AccountSelfInfo();
+    private BottomNavigationViewEx bottom_navigation_edit_profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,9 +63,12 @@ public class UserProfileEdit extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         Button saveChanges = (Button) findViewById(R.id.edit_profile_save_changes);
         setInfo();
+        if (!accountSelfInfo.isRegistered()){
+            bottom_navigation_edit_profile.removeAllViews();
+        }
+
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,10 +100,11 @@ public class UserProfileEdit extends AppCompatActivity {
                         & validation.validateName(name_error_edit_profile, edit_profile_name)
                         & validation.validateName(surname_error_edit_profile, edit_profile_surname)
                         & validation.validateEmptyData(edit_profile_age_error, edit_profile_age)
-//                        & validation.validateEmail(email_error_edit_profile, edit_profile_email)
+                        & validation.validateEmail(email_error_edit_profile, edit_profile_email)
                 ) {
                     new SaveAccountSelfInfo().execute();
                     new SaveSpecialities().execute();
+                    openUserProfile();
                 }
             }
         });
@@ -202,7 +208,7 @@ public class UserProfileEdit extends AppCompatActivity {
     }
 
     public void openUserProfile() {
-        Intent intent = new Intent(this, UserProfileEdit.class);
+        Intent intent = new Intent(this, UserProfile.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
@@ -232,6 +238,7 @@ public class UserProfileEdit extends AppCompatActivity {
     }
 
     public void setInfo(){
+        bottom_navigation_edit_profile = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation);
         textInputPhoneError = (TextInputLayout) findViewById(R.id.edit_profile_phone_error);
         edit_profile_about_myself = (EditText) findViewById(R.id.edit_profile_about_myself);
         counterAboutMyself = (TextView) findViewById(R.id.edit_profile_counter_about_myself);

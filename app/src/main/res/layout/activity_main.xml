@@ -67,7 +67,7 @@
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="32dp"
         app:errorTextColor="@color/colorRed"
         />
 
@@ -86,7 +86,7 @@
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="-52dp"
+        android:layout_marginBottom="-42dp"
         app:errorTextColor="@color/colorRed"/>
 
     <Button

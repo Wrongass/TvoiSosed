@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,15 +23,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class UserProfile extends AppCompatActivity {
-    private static String id, name, surname, age, socialUrl, sex, specialities, email, phone;
-    private static boolean animals;
-    private static boolean children;
-    private static boolean music;
-    private static boolean russian_language;
-    private static boolean smoking;
+public class UserProfile extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private static boolean successRefreshToken;
-    private static boolean registered;
+    private static TextView profile_name, profile_about, profile_socialUrl, profile_phone, profile_email;
+    private static TextView animals_profile, children_profile, music_profile, russian_language_profile, smoking_profile;
+    private static AccountSelfInfo accountSelfInfo = new AccountSelfInfo();
 
     private BottomNavigationView navigation;
 
@@ -43,8 +42,7 @@ public class UserProfile extends AppCompatActivity {
         AccountSelfInfo task = new AccountSelfInfo();
         task.execute();
         try {
-            // добавить восклицательный знак чтобы работало
-            if(task.get(10, TimeUnit.SECONDS)){
+            if(!task.get(10, TimeUnit.SECONDS)){
                 openUserProfileEdit();
             }
         } catch (ExecutionException e) {
@@ -59,6 +57,9 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
         navigation = findViewById(R.id.bottom_navigation);
         navigation.setSelectedItemId(R.id.profile);
+
+        setInfo();
+
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -82,6 +83,13 @@ public class UserProfile extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void showPopup(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
     }
 
     public void openSearch() {
@@ -133,4 +141,66 @@ public class UserProfile extends AppCompatActivity {
         return successRefreshToken;
     }
 
+    public void setInfo(){
+        profile_name = (TextView) findViewById(R.id.profile_name);
+        profile_about = (TextView) findViewById(R.id.profile_about);
+        profile_socialUrl = (TextView) findViewById(R.id.profile_socialUrl);
+        profile_phone = (TextView) findViewById(R.id.profile_phone);
+        profile_email = (TextView) findViewById(R.id.profile_email);
+
+        animals_profile = (TextView) findViewById(R.id.animals_profile);
+        children_profile = (TextView) findViewById(R.id.children_profile);
+        music_profile = (TextView) findViewById(R.id.music_profile);
+        russian_language_profile = (TextView) findViewById(R.id.russian_language_profile);
+        smoking_profile = (TextView) findViewById(R.id.smoking_profile);
+
+        profile_name.setText(accountSelfInfo.getName() + " " + accountSelfInfo.getSurname());
+        profile_about.setText(accountSelfInfo.getAbout());
+        profile_socialUrl.setText(accountSelfInfo.getSocialUrl());
+        profile_phone.setText(accountSelfInfo.getPhone());
+        profile_email.setText(accountSelfInfo.getEmail());
+
+        if(accountSelfInfo.isAnimals()){
+            animals_profile.setText("Есть");
+        } else {
+            animals_profile.setText("Нет");
+        }
+        if(accountSelfInfo.isChildren()){
+            children_profile.setText("Есть");
+        } else {
+            children_profile.setText("Нет");
+        }
+        if(accountSelfInfo.isMusic()){
+            music_profile.setText("Слушаю без наушников");
+        } else {
+            music_profile.setText("Слушаю в наушниках");
+        }
+        if(accountSelfInfo.isRussian_language()){
+            russian_language_profile.setText("Родной");
+        } else {
+            russian_language_profile.setText("Второстепенный");
+        }
+        if(accountSelfInfo.isSmoking()){
+            smoking_profile.setText("Курю");
+        } else {
+            smoking_profile.setText("Не курю");
+        }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.edit_profile:
+                openUserProfileEdit();
+                return true;
+            case R.id.exit:
+                Token token = new Token();
+                token.setRefreshTokenTime("0");
+                token.setAccessTokenTime("0");
+                token.saveTokens(this);
+                openMainActivity();
+                return true;
+        }
+        return false;
+    }
 }
